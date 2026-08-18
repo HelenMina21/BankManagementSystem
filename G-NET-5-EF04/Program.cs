@@ -1,4 +1,4 @@
-﻿namespace G_NET_5_EF04
+﻿namespace BankManagementSystem
 {
     internal class Program
     {
