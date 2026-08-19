@@ -16,6 +16,8 @@ namespace BankManagementSystem.Data
         }
 
         public DbSet<Branch> Branches { get; set; }
+        public DbSet<Manager> Managers { get; set; }
+        public DbSet<Account> Accounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,6 +32,33 @@ namespace BankManagementSystem.Data
                       .IsRequired();
 
                 entity.Property(b => b.PhoneNumber)
+                      .IsRequired();
+            });
+
+            modelBuilder.Entity<Manager>(entity =>
+            {
+                entity.Property(m => m.FullName)
+                      .IsRequired();
+
+                entity.Property(m => m.Email)
+                      .IsRequired();
+
+                entity.Property(m => m.PhoneNumber)
+                      .IsRequired();
+            });
+
+            modelBuilder.Entity<Account>(entity =>
+            {
+                entity.HasKey(a => a.AccountNumber);
+
+                entity.Property(a => a.AccountType)
+                      .IsRequired();
+
+                entity.Property(a => a.Balance)
+                      .HasPrecision(18, 2)
+                      .IsRequired();
+
+                entity.Property(a => a.OpeningDate)
                       .IsRequired();
             });
         }
