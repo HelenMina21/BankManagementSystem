@@ -8,7 +8,7 @@ using BankManagementSystem.Models;
 
 namespace BankManagementSystem.Data
 {
-    internal class BankDbContext:DbContext
+    public class BankDbContext:DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

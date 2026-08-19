@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankManagementSystem.Models
 {
-    internal class Branch
+    public class Branch
     {
         public string Code { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
