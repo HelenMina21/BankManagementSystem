@@ -19,7 +19,7 @@ namespace BankManagementSystem.Data
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Customer> Customers { get; set; }
-
+        public DbSet<Transaction> Transactions { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Branch>(entity =>
@@ -72,6 +72,16 @@ namespace BankManagementSystem.Data
                 entity.Property(c => c.Email).IsRequired();
                 entity.Property(c => c.CustomerType).IsRequired();
                 entity.Property(c => c.DateOfBirth).IsRequired();
+            }
+            );
+
+            modelBuilder.Entity<Transaction>(entity=>
+            {
+                entity.HasKey(t => t.TransactionNumber);
+                entity.Property(t => t.TransactionType).IsRequired();
+                entity.Property(t => t.Amount).HasPrecision(18,2).IsRequired();
+                entity.Property(t => t.TransactionDate).IsRequired();
+                entity.Property(t => t.Note).IsRequired();
             }
             );
         }
