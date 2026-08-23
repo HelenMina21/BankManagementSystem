@@ -14,5 +14,6 @@ namespace BankManagementSystem.Models
         public string PhoneNumber { get; set; } = string.Empty;
 
         public Manager? Manager { get; set; }
+        public ICollection<Account> Accounts { get; set; } = new List<Account>();
     }
 }

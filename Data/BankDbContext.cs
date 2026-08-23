@@ -89,6 +89,11 @@ namespace BankManagementSystem.Data
                .HasOne(m => m.Branch)
                .WithOne(b => b.Manager)
                .HasForeignKey<Manager>(m => m.BranchCode);
+
+            modelBuilder.Entity<Account>()
+               .HasOne(a => a.Branch)
+               .WithMany(b => b.Accounts)
+               .HasForeignKey(a => a.BranchCode);
         }
 
     }

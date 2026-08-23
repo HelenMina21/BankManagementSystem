@@ -12,6 +12,9 @@ namespace BankManagementSystem.Models
         public string AccountType { get; set; } = string.Empty;
         public decimal Balance { get; set; } 
         public DateTime OpeningDate { get; set; }
+        public string? BranchCode { get; set; }
+        public Branch? Branch { get; set; } 
+
 
     }
 }
