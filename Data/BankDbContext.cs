@@ -84,6 +84,11 @@ namespace BankManagementSystem.Data
                 entity.Property(t => t.Note).IsRequired();
             }
             );
+
+            modelBuilder.Entity<Manager>()
+               .HasOne(m => m.Branch)
+               .WithOne(b => b.Manager)
+               .HasForeignKey<Manager>(m => m.BranchCode);
         }
 
     }

@@ -14,5 +14,7 @@ namespace BankManagementSystem.Models
         public string PhoneNumber { get; set; } = string.Empty;
         public DateTime HireDate { get; set; }
 
+        public string? BranchCode { get; set; }
+        public Branch? Branch { get; set; }
     }
 }
