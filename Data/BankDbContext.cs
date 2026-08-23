@@ -85,6 +85,9 @@ namespace BankManagementSystem.Data
             }
             );
 
+            modelBuilder.Entity<CustomerAccount>()
+               .HasKey(ca => new { ca.CustomerId, ca.AccountNumber });
+
             modelBuilder.Entity<Manager>()
                .HasOne(m => m.Branch)
                .WithOne(b => b.Manager)
@@ -94,6 +97,21 @@ namespace BankManagementSystem.Data
                .HasOne(a => a.Branch)
                .WithMany(b => b.Accounts)
                .HasForeignKey(a => a.BranchCode);
+
+            modelBuilder.Entity<Transaction>()
+                .HasOne(t => t.Account)
+                .WithMany(a => a.Transactions)
+                .HasForeignKey(t => t.AccountNumber);
+
+            modelBuilder.Entity<CustomerAccount>()
+               .HasOne(ca => ca.Customer)
+               .WithMany(c => c.CustomerAccounts)
+               .HasForeignKey(ca => ca.CustomerId);
+
+            modelBuilder.Entity<CustomerAccount>()
+               .HasOne(ca => ca.Account)
+               .WithMany(a => a.CustomerAccounts)
+               .HasForeignKey(ca => ca.AccountNumber);
         }
 
     }

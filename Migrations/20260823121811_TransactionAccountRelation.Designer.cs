@@ -4,6 +4,7 @@ using BankManagementSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace G_NET_5_EF04.Migrations
 {
     [DbContext(typeof(BankDbContext))]
-    partial class BankDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260823121811_TransactionAccountRelation")]
+    partial class TransactionAccountRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,32 +113,6 @@ namespace G_NET_5_EF04.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("BankManagementSystem.Models.CustomerAccount", b =>
-                {
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AccountNumber")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AccountStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("OwnershipStartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("OwnershipType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CustomerId", "AccountNumber");
-
-                    b.HasIndex("AccountNumber");
-
-                    b.ToTable("CustomerAccount");
-                });
-
             modelBuilder.Entity("BankManagementSystem.Models.Manager", b =>
                 {
                     b.Property<int>("Id")
@@ -213,25 +190,6 @@ namespace G_NET_5_EF04.Migrations
                     b.Navigation("Branch");
                 });
 
-            modelBuilder.Entity("BankManagementSystem.Models.CustomerAccount", b =>
-                {
-                    b.HasOne("BankManagementSystem.Models.Account", "Account")
-                        .WithMany("CustomerAccounts")
-                        .HasForeignKey("AccountNumber")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BankManagementSystem.Models.Customer", "Customer")
-                        .WithMany("CustomerAccounts")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Account");
-
-                    b.Navigation("Customer");
-                });
-
             modelBuilder.Entity("BankManagementSystem.Models.Manager", b =>
                 {
                     b.HasOne("BankManagementSystem.Models.Branch", "Branch")
@@ -252,8 +210,6 @@ namespace G_NET_5_EF04.Migrations
 
             modelBuilder.Entity("BankManagementSystem.Models.Account", b =>
                 {
-                    b.Navigation("CustomerAccounts");
-
                     b.Navigation("Transactions");
                 });
 
@@ -262,11 +218,6 @@ namespace G_NET_5_EF04.Migrations
                     b.Navigation("Accounts");
 
                     b.Navigation("Manager");
-                });
-
-            modelBuilder.Entity("BankManagementSystem.Models.Customer", b =>
-                {
-                    b.Navigation("CustomerAccounts");
                 });
 #pragma warning restore 612, 618
         }

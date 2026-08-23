@@ -13,5 +13,8 @@ namespace BankManagementSystem.Models
         public string Note { get; set; } = string.Empty;
         public string TransactionType { get; set; } = string.Empty;
         public decimal Amount { get; set; }
+
+        public Account? Account { get; set; }
+        public string? AccountNumber { get; set; }
     }
 }

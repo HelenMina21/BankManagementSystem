@@ -16,5 +16,8 @@ namespace BankManagementSystem.Models
         public string NationalId { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
         public DateTime DateOfBirth { get; set; }
+
+        public ICollection<CustomerAccount> CustomerAccounts { get; set; }
+    = new List<CustomerAccount>();
     }
 }
